@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OSC Network Setup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">  
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>
+        OSC Network Setup
+    </h1>
+    <div>
+        <p>
+            Enter credentials for your network.
+        </p>
+        <!-- Input fields for credentials -->
+        <form class="setup" action='/setcreds' method='post'>
+            <label class="cell" for="ssid">SSID:</label>
+            <input class="cell" type='text' name='ssid' placeholder='Enter SSID'>
+            <label class="cell" for="pwd">Password:</label>
+            <input class="cell" type='password' name='pwd' placeholder='Enter password'>
+            <label class="cell" for="eip">ESP IP:</label>
+            <div class="sip">
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='eip1' value="192"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='eip2' value="168"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='eip3' value="1"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='eip4' value="101"/>
+            </div>
+            <label class="cell" for="rip">Router IP:</label>
+            <div class="sip">
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='rip1' value="192"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='rip2' value="168"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='rip3' value="1"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='rip4' value="254"/>
+            </div>
+            <label class="cell" for="snet">Subnet:</label>
+            <div class="sip">
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='snet1' value="255"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='snet2' value="255"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='snet3' value="255"/>
+                <input class="cell" type="text" inputmode="numeric" minlength="1" maxlength="3" name='snet4' value="0"/>
+            </div>
+            <input class="cell" type='submit' value='Submit'>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OSC Terminal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">  
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>
+        OSC Terminal
+    </h1>
+    <p>
+        Choose settings
+    </p>
+    <!-- Input fields for settings -->
+    <form class="terminal" action='/changesettings' method='post'>
+        <label class="cell13" for="destip">Target IP:</label>
+        <div class="ip">
+            <input class="cell" type="text" inputmode="numeric" size="3" minlength="1" maxlength="3" name='tip1' value="192"/>
+            <input class="cell" type="text" inputmode="numeric" size="3" minlength="1" maxlength="3" name='tip2' value="168"/>
+            <input class="cell" type="text" inputmode="numeric" size="3" minlength="1" maxlength="3" name='tip3' value="1"/>
+            <input class="cell" type="text" inputmode="numeric" size="3" minlength="1" maxlength="3" name='tip4' value="100"/>
+        </div>
+        <label class="cell14" for="tPort">Target Port:</label>
+        <input class="cell57" type="text" inputmode="numeric" size="5" minlength="1" maxlength="5"  name='tPort' value='8888'>
+        <label class="cell14" for="outPort">Outgoing Port:</label>
+        <input class="cell57" type="text" inputmode="numeric" size="5" minlength="1" maxlength="5"  name='outPort' value='1234'>
+        <div class="cell13">
+            <label class="container">Analog 1
+                <div class="containercell">
+                    <input type="checkbox" name="a1">
+                    <div class="checkmark"></div>
+                </div>
+            </label>
+        </div>
+        <div class="cell57">
+            <label class="container">Analog 2
+                <div class="containercell">
+                    <input type="checkbox" name="a2">
+                    <div class="checkmark"></div>
+                </div>
+            </label>
+        </div>
+        <div class="cell13">
+            <label class="container">Analog 3
+                <div class="containercell">
+                    <input type="checkbox" name="a3">
+                    <div class="checkmark"></div>
+                </div>
+            </label>
+        </div>
+        <div class="cell57">
+            <label class="container">Analog 4
+                <div class="containercell">
+                    <input type="checkbox" name="a4">
+                    <div class="checkmark"></div>
+                </div>
+            </label>
+        </div>
+        <input class="cell13" type='submit' value='Send settings'>
+    </form>
+</body>
+</html>
