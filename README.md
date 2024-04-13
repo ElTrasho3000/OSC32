@@ -50,7 +50,7 @@ In setup mode:
 - You will reach the Network Setup page\
 ![NetSet](resources/NetSet.png)
 - Enter your desired configuration and press "Submit".
-- You should be redirected to success page
+- You should be redirected to success page\
 ![NetSetSuccess](resources/NetSetSuccess.png)
 - Restart the device.
 
