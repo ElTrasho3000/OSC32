@@ -29,7 +29,7 @@ The project is maintained by [IotSteve](https://github.com/IoTSteve/) and [ElTra
 ![Build](resources/BuildFilesystemImage.png)
 - When it's done, go to "Upload Filesystem Image"\
 ![Upload](resources/UploadFilesystemImage.png)
-- Then Build(Ctrl+Alt+U) and Upload(Ctrl+Alt+U)
+- Then Build(Ctrl+Alt+B) and Upload(Ctrl+Alt+U)
 - Once the upload is succesfully finished, the device is ready to use
 ### Setup
 #### Hardware
