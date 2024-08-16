@@ -35,9 +35,12 @@ The project is maintained by [IotSteve](https://github.com/IoTSteve/) and [ElTra
 #### Hardware
 - We will offer a breakout board in the future
 - We recommend using a breadboard to make wiring easier
-- To enable setup-mode connect GPIO-27 to 3v3 and re-/start device\
+- To enable setup-mode connect GPIO-14 to 3v3 and re-/start device\
 (The pin is set to INPUT_PULLDOWN, using a switch to\
 connect to 3v3 is recommended for long-term usage)
+- RGB-LED red is GPIO-25
+- RGB-LED green is GPIO-26
+- RGB-LED blue is GPIO-27
 - Analog input 1 is GPIO-34
 - Analog input 2 is GPIO-35
 - Analog input 3 is GPIO-32
@@ -45,21 +48,30 @@ connect to 3v3 is recommended for long-term usage)
 
 #### Software
 In setup mode:
+- The LED lights up red
 - Connect to the WiFi Access Point named "OSC-Setup-Terminal-[device ID]"
 - Open a browser and go to "192.168.4.1"(The default ESP32-IP)
 - You will reach the Network Setup page\
 ![NetSet](resources/NetSet.png)
-- Enter your desired configuration and press "Submit".
+- Enter your desired configuration and press "Submit"
 - You should be redirected to success page\
 ![NetSetSuccess](resources/NetSetSuccess.png)
-- Restart the device.
+- Restart the device
+</br>
+</br>
+</br>
 
 In operation mode:
-- Connect to the WiFi you will be working in.
+- While the LED is blinking green, the devices tries to connect to\
+WiFi, using the configuration entered in setup mode
+- The LED starts blinking blue when WiFi connection is etablished\
+and the device is ready
+- Connect to the WiFi you will be working in
 - Open a browser and got to the IP you declared in the setup as "ESP IP"
 - You will reach the OSC-Terminal\
 ![OSCsetings](resources/OSCsettings.png)
 - Enter your desired configuration and press "Send settings"
 - You should be redirected to success page\
 ![OSCrunning](resources/OSCrunning.png)
+- As long as the OSC-service is running, the LED lights up blue
 - If you want to change settings, press "Reset"

@@ -4,7 +4,6 @@
 #include <BluetoothSerial.h>
 #include <SPIFFS.h>
 
-
 void startStationMode(){
   // Create IPAddress variables
   IPAddress staticIP;
@@ -53,11 +52,5 @@ void startStationMode(){
   }
   if (ssid && password){
     WiFi.begin(ssid.readString(), password.readString());
-    Serial.println("Connecting to WiFi");
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(1000);
-      Serial.print(".");
     }
-  Serial.println("Connected to WiFi");
-  }
 }

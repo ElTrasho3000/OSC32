@@ -10,23 +10,35 @@
 #include "oscTerminal.h"
 #include "startStationMode.h"
 
-// GPIO 23 as a switch to toggle setup-mode.
-const unsigned int SETUP_SWITCH = 27;
+// GPIO 27 as a switch to toggle setup-mode.
+const unsigned int SETUP_SWITCH = 14;
 
-// GPIO pin
-const unsigned int aPin1 = 34;
-const unsigned int aPin2 = 35;
-const unsigned int aPin3 = 32;
-const unsigned int aPin4 = 33;
+// GPIOs for analog input 
+const unsigned int A_IN1 = 34;
+const unsigned int A_IN2 = 35;
+const unsigned int A_IN3 = 32;
+const unsigned int A_IN4 = 33;
+
+// GPIOs for LED
+const unsigned int LEDR = 25;
+const unsigned int LEDG = 26;
+const unsigned int LEDB = 27;
 
 // Variables to store and compare input values
-unsigned int prevValaPin1 = 0;
-unsigned int prevValaPin2 = 0;
-unsigned int prevValaPin3 = 0;
-unsigned int prevValaPin4 = 0;
+unsigned int prevValA_IN1 = 0;
+unsigned int prevValA_IN2 = 0;
+unsigned int prevValA_IN3 = 0;
+unsigned int prevValA_IN4 = 0;
 
 void setup() {
-  // Use internal pullup-resistor to set high.
+  // Set LED GPIOs to output and 0
+  pinMode(LEDR, OUTPUT);
+  digitalWrite(LEDR, 0);
+  pinMode(LEDG, OUTPUT);
+  digitalWrite(LEDG, 0);
+  pinMode(LEDB, OUTPUT);
+  digitalWrite(LEDB, 0);
+  // Use internal pulldown-resistor to set low.
   pinMode(SETUP_SWITCH, INPUT_PULLDOWN);
   // Start Serial Monitor
   Serial.begin(9600);
@@ -39,13 +51,18 @@ void setup() {
   // Check whether Setup is enabled via switch
   if (digitalRead(SETUP_SWITCH) == 1) {
       while (wifiSetup() == true){
+        digitalWrite(LEDR, 1);
         delay(1000);
       };
+      digitalWrite(LEDR, 0);
       // Should we automatically put esp32 into deep sleep mode here?
   }
   // Connect to user's network
   startStationMode();
   while (WiFi.status() != WL_CONNECTED) {
+    digitalWrite(LEDG, 1);
+    delay(1000);
+    digitalWrite(LEDG, 0);
     delay(1000);
   }
   // Initiate OSC-Terminal
@@ -54,7 +71,10 @@ void setup() {
 
 void loop(){
   while (UdpConfig.setup == 0){
-    delay(1000);
+    digitalWrite(LEDB, 1);
+    delay(500);
+    digitalWrite(LEDB, 0);
+    delay(500);
   }
   // UDP target IP
   IPAddress tIP(UdpConfig.tip1, UdpConfig.tip2, UdpConfig.tip3, UdpConfig.tip4);
@@ -66,54 +86,55 @@ void loop(){
   Udp.begin(outPort);
   // Run UDP/OSC while
   while (UdpConfig.setup == 1){
-    unsigned int valaPin1 = map((analogRead(aPin1)/100), 0, 40, 0, 100);
-    unsigned int valaPin2 = map((analogRead(aPin2)/100), 0, 40, 0, 100);
-    unsigned int valaPin3 = map((analogRead(aPin3)/100), 0, 40, 0, 100);
-    unsigned int valaPin4 = map((analogRead(aPin4)/100), 0, 40, 0, 100);
+    digitalWrite(LEDB, 1);
+    unsigned int valA_IN1 = map((analogRead(A_IN1)/100), 0, 40, 0, 100);
+    unsigned int valA_IN2 = map((analogRead(A_IN2)/100), 0, 40, 0, 100);
+    unsigned int valA_IN3 = map((analogRead(A_IN3)/100), 0, 40, 0, 100);
+    unsigned int valA_IN4 = map((analogRead(A_IN4)/100), 0, 40, 0, 100);
     // Wait until user configured UDP
-    while (UdpConfig.a1 == 1 && valaPin1 != prevValaPin1){
+    while (UdpConfig.a1 == 1 && valA_IN1 != prevValA_IN1){
       Udp.beginPacket(tIP, tPort);
       //the message takes an address as an required argument
       OSCMessage msg1("/ST");
       //add data of any type to the end of the message with 'add'";
-      msg1.add("A1").add(valaPin1);
+      msg1.add("A1").add(valA_IN1);
       msg1.send(Udp);
       Udp.endPacket();
       msg1.empty();
-      prevValaPin1 = valaPin1;
+      prevValA_IN1 = valA_IN1;
     }
-    if (UdpConfig.a2 == 1 && valaPin2 != prevValaPin2){
+    if (UdpConfig.a2 == 1 && valA_IN2 != prevValA_IN2){
       Udp.beginPacket(tIP, tPort);
       //the message takes an address as an required argument
       OSCMessage msg2("/ST");
       //add data of any type to the end of the message with 'add'";
-      msg2.add("A2").add(valaPin2);
+      msg2.add("A2").add(valA_IN2);
       msg2.send(Udp);
       Udp.endPacket();
       msg2.empty();
-      prevValaPin2 = valaPin2;
+      prevValA_IN2 = valA_IN2;
     }
-    if (UdpConfig.a3 ==1 && valaPin3 != prevValaPin3){
+    if (UdpConfig.a3 ==1 && valA_IN3 != prevValA_IN3){
       Udp.beginPacket(tIP, tPort);
       //the message takes an address as an required argument
       OSCMessage msg("/ST");
       //add data of any type to the end of the message with 'add'";
-      msg.add("A3").add(valaPin3);
+      msg.add("A3").add(valA_IN3);
       msg.send(Udp);
       Udp.endPacket();
       msg.empty();
-      prevValaPin3 = valaPin3;
+      prevValA_IN3 = valA_IN3;
     }
-    if (UdpConfig.a4 == 1 && valaPin4 != prevValaPin4){
+    if (UdpConfig.a4 == 1 && valA_IN4 != prevValA_IN4){
       Udp.beginPacket(tIP, tPort);
       //the message takes an address as an required argument
       OSCMessage msg("/ST");
       //add data of any type to the end of the message with 'add'";
-      msg.add("A4").add(valaPin4);
+      msg.add("A4").add(valA_IN4);
       msg.send(Udp);
       Udp.endPacket();
       msg.empty();
-      prevValaPin4 = valaPin4;
+      prevValA_IN4 = valA_IN4;
     }
   }
 }
