@@ -10,7 +10,7 @@
 #include "oscTerminal.h"
 #include "startStationMode.h"
 
-// GPIO 27 as a switch to toggle setup-mode.
+// GPIO 14 as a switch to toggle setup-mode.
 const unsigned int SETUP_SWITCH = 14;
 
 // GPIOs for analog input 
@@ -22,7 +22,12 @@ const unsigned int A_IN4 = 33;
 // GPIOs for LED
 const unsigned int LEDR = 25;
 const unsigned int LEDG = 26;
-const unsigned int LEDB = 27;
+const unsigned int LEDB = 27; 
+
+// Array of unused GPIOs
+const unsigned int UNUSED_GPIO[12] {
+  12, 13, 23, 22, 21, 4, 0, 2, 15, 19, 18, 5
+};
 
 // Variables to store and compare input values
 unsigned int prevValA_IN1 = 0;
@@ -31,6 +36,15 @@ unsigned int prevValA_IN3 = 0;
 unsigned int prevValA_IN4 = 0;
 
 void setup() {
+  // Set pulldown for unused pins
+  for (int i = 0; i <= 11; i++) {
+    pinMode(UNUSED_GPIO[i], INPUT_PULLUP);
+  };
+  // Set analog input modes
+  pinMode(A_IN1, INPUT_PULLDOWN);
+  pinMode(A_IN2, INPUT_PULLDOWN);
+  pinMode(A_IN3, INPUT_PULLDOWN); 
+  pinMode(A_IN4, INPUT_PULLDOWN);
   // Set LED GPIOs to output and 0
   pinMode(LEDR, OUTPUT);
   digitalWrite(LEDR, 0);

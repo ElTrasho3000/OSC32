@@ -4,3 +4,4 @@ PlatformIO_Project/.vscode/c_cpp_properties.json
 PlatformIO_Project/.vscode/launch.json
 PlatformIO_Project/.vscode/ipch
 PlatformIO_Project/.vscode/extensions.json
+PlatformIO_Project/.gitignore
