@@ -4,8 +4,8 @@
 #include <WiFi.h>
 #include <ESPAsyncWebServer.h>
 
-// Unique device ID
-const String deviceID = "000";
+// link other files
+#include "deviceID.h"
 
 // Create an instance of AsyncWebServer
 AsyncWebServer setupServer(80);
@@ -15,8 +15,8 @@ bool setupRunning = false;
 bool wifiSetup(){
     // Set bool indicating running setup to true
     setupRunning = true;
-    // AccessPoint Name with deviceID
-    String apName = "OSC32-Network-Setup-" + deviceID;
+    // AccessPoint Name with DEVICE_ID
+    String apName = "OSC32-Network-Setup-" + DEVICE_ID;
     // Start Access Point
     WiFi.softAP(apName, "password123");
     // Start webserver for OSC Setup Terminal

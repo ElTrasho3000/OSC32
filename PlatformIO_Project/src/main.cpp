@@ -6,6 +6,7 @@
 #include <BluetoothSerial.h>
 #include <SPIFFS.h>
 // link other files
+#include "deviceID.h"
 #include "wifiSetup.h"
 #include "oscTerminal.h"
 #include "startStationMode.h"
@@ -111,7 +112,7 @@ void loop(){
       //the message takes an address as an required argument
       OSCMessage msg1("/ST");
       //add data of any type to the end of the message with 'add'";
-      msg1.add("A1").add(valA_IN1);
+      msg1.add(DEVICE_ID).add("A1").add(valA_IN1);
       msg1.send(Udp);
       Udp.endPacket();
       msg1.empty();
@@ -122,7 +123,7 @@ void loop(){
       //the message takes an address as an required argument
       OSCMessage msg2("/ST");
       //add data of any type to the end of the message with 'add'";
-      msg2.add("A2").add(valA_IN2);
+      msg2.add(DEVICE_ID).add("A2").add(valA_IN2);
       msg2.send(Udp);
       Udp.endPacket();
       msg2.empty();
@@ -133,7 +134,7 @@ void loop(){
       //the message takes an address as an required argument
       OSCMessage msg("/ST");
       //add data of any type to the end of the message with 'add'";
-      msg.add("A3").add(valA_IN3);
+      msg.add(DEVICE_ID).add("A3").add(valA_IN3);
       msg.send(Udp);
       Udp.endPacket();
       msg.empty();
@@ -144,7 +145,7 @@ void loop(){
       //the message takes an address as an required argument
       OSCMessage msg("/ST");
       //add data of any type to the end of the message with 'add'";
-      msg.add("A4").add(valA_IN4);
+      msg.add(DEVICE_ID).add("A4").add(valA_IN4);
       msg.send(Udp);
       Udp.endPacket();
       msg.empty();
