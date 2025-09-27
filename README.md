@@ -50,6 +50,7 @@ connect to 3v3 is recommended for long-term usage)
 In setup mode:
 - The LED lights up red
 - Connect to the WiFi Access Point named "OSC-Setup-Terminal-[device ID]"
+- The default password ist 'password123'
 - Open a browser and go to "192.168.4.1"(The default ESP32-IP)
 - You will reach the Network Setup page\
 ![NetSet](resources/NetSet.png)
